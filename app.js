@@ -1,4 +1,4 @@
-﻿var app = angular.module('ActionDriveApp', ['ui.router', 'ui.bootstrap', 'toaster', 'bootstrapLightbox', 'ngSanitize', 'ng-youtube-upload']);
+﻿var app = angular.module('ActionDriveApp', ['ui.router', 'ui.bootstrap', 'toaster', 'bootstrapLightbox', 'ngSanitize']);//, 'ng-youtube-upload'
 
 //app.config(function (uiGmapGoogleMapApiProvider) {
 //    uiGmapGoogleMapApiProvider.configure({
