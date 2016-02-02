@@ -23,7 +23,7 @@ angular.module('ng-youtube-upload', [
     }])
     .directive('youtubeUploader', ['$window', '$alert', function ($window, $alert) {
         'use strict';
-
+        
         return {
             restrict: 'AE',
             templateUrl: "Scripts/ng-youtube-upload.html",
