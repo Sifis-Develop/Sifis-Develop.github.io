@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="ActionDriveApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Action Drive</title>
+    <script src="Scripts/jquery-2.1.1.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-touch.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="Scripts/angular-local-storage.min.js"></script>
+    <script src="Scripts/angular-resource.min.js"></script>
+    <script src="Scripts/ui-bootstrap-tpls-0.12.0.min.js"></script>
+    <script src="Scripts/loading-bar.js"></script>
+    <script src="Scripts/angular-bootstrap-lightbox.js"></script>
+    <script src="Scripts/toaster.js"></script>
+    <script src="Scripts/angular-sanitize.js"></script>
+    <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/angular-sanitize.js"></script>
+    <script src="Scripts/globalize.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=init"></script>
+
+    <script src="Scripts/ng-file-upload.min.js"></script>
+    <script src="Scripts/angular-strap.min.js"></script>
+
+    <link rel="stylesheet" href="Content/loading-bar.css">
+    <link rel="stylesheet" href="Content/angular-bootstrap-lightbox.css">
+    <link rel="stylesheet" href="Content/bootstrap.css">
+    <link rel="stylesheet" href="Content/animations.css">
+    <link rel="stylesheet" href="Content/toaster.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+
+    <script src="dist/youtube_upload.min.js"></script>
+
+    <script src="app.js"></script>
+    <script src="Scripts/VideoListContoller.js"></script>
+    <script src="Scripts/YoutubeDirective.js"></script>
+    <script src="Scripts/GlobalController.js"></script>
+    <script src="Scripts/PlayVideoController.js"></script>
+    <script src="Scripts/VenuesListController.js"></script>
+    <script src="Scripts/FilterVenuesService.js"></script>
+    <script src="Scripts/SelectSpotListController.js"></script>
+
+    <script src="Scripts/cors_upload.js"></script>
+    <script src="Scripts/ng-youtube-upload.js"></script>
+
+    <script src="config.route.js"></script>
+
+</head>
+<body ng-controller="VideoListContoller">
+    <div id="wrapper">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="">Action Drive</a>
+                </div>
+
+                <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a ui-sref="UploadVideo"><i class="fa fa-exchange fa-fw"></i> Upload Video<span></span></a>
+                        </li>
+                        <li>
+                            <a ui-sref="PlayVideo({ videoId: 'b02nDL3o8CA' })"><i class="fa fa-exchange fa-fw"></i> Play Video<span></span></a>
+                        </li>
+                        <li>
+                            <a ui-sref="VideoList"><i class="fa fa-exchange fa-fw"></i> Video List<span></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="page-wrapper" ng-class="{'full-width': !authenticationInfo.isAuth}">
+            <div ui-view></div>
+        </div>
+    </div>
+    <toaster-container></toaster-container>
+</body>
+<script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+</html>
+
+

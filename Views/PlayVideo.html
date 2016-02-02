@@ -1,0 +1,27 @@
+﻿<div class="row">
+    <div class="col-xs-6">
+        <youtube width="640" height="390" videoid="{{videoId}}" times="timesToPlay.times"></youtube>
+    </div>
+    <div class="col-xs-6">
+        <!--<h1>Information List</h1>
+        <table class="table table-striped table-hover ">
+            <thead>
+                <tr>
+                    <th>Travels</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="travel in travels">
+                    <td><input type="radio" name="optionsRadios" ng-model="model.selectedTravel" ng-value="{{travel}}"></td>
+                    <td>{{travel.Name}}</td>
+                    <td>{{travel.Day}}</td>
+                </tr>
+            </tbody>
+        </table>-->
+        <button class="btn btn-danger" ng-click="getFoursquareInfo()">Get Foursquare Info</button>
+        <button class="btn btn-info" ng-click="openVenuesList()">Play Specific Frames</button>
+        <button class="btn btn-success" ng-click="openYoutube()">Youtube</button>
+    </div>
+</div>
