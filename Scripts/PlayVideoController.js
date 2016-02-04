@@ -1,7 +1,7 @@
 ﻿angular.module('ActionDriveApp')
-    .controller('PlayVideoController', ['$scope', '$window', '$stateParams', '$http', '$q', 'toaster', '$modal', 'FilterVenuesService', PlayVideoController]);
+    .controller('PlayVideoController', ['$scope', '$window', '$stateParams', '$http', '$q', 'toaster', '$uibModal', 'FilterVenuesService', PlayVideoController]);
 
-function PlayVideoController($scope, $window, $stateParams, $http, $q, toaster, $modal, FilterVenuesService) {
+function PlayVideoController($scope, $window, $stateParams, $http, $q, toaster, $uibModal, FilterVenuesService) {
 
     $scope.videoId = $stateParams.videoId;
     $scope.travels = [];
@@ -60,7 +60,7 @@ function PlayVideoController($scope, $window, $stateParams, $http, $q, toaster, 
 
     $scope.showAllVenuesList = function () {
 
-        var modalInstance = $modal.open({
+        var modalInstance = $uibModal.open({
             templateUrl: 'Views/VenuesList.html',
             controller: 'VenuesListController',
             size: 'lg',
@@ -77,7 +77,7 @@ function PlayVideoController($scope, $window, $stateParams, $http, $q, toaster, 
         var filtered = FilterVenuesService.FilterVenues($scope.pointsOfInterest, $scope.informationList);
 
         //$scope.timesToPlay = "No";
-        var modalInstance = $modal.open({
+        var modalInstance = $uibModal.open({
             templateUrl: 'Views/SelectSpotsList.html',
             controller: 'SelectSpotListController',
             size: 'lg',
@@ -120,7 +120,7 @@ function PlayVideoController($scope, $window, $stateParams, $http, $q, toaster, 
 
     $scope.openYoutube = function () {
 
-        var modalInstance = $modal.open({
+        var modalInstance = $uibModal.open({
             templateUrl: 'Views/ModalYoutube.html',
             size: 'lg'
         });

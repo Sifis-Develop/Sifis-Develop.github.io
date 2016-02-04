@@ -1,7 +1,7 @@
 ﻿angular.module('ActionDriveApp')
-    .controller('SelectSpotListController', ['$scope', '$modalInstance', 'items', SelectSpotListController]);
+    .controller('SelectSpotListController', ['$scope', '$uibModalInstance', 'items', SelectSpotListController]);
 
-function SelectSpotListController($scope, $modalInstance, items) {
+function SelectSpotListController($scope, $uibModalInstance, items) {
 
     $scope.items = items;
     console.log($scope.items);
@@ -29,10 +29,10 @@ function SelectSpotListController($scope, $modalInstance, items) {
         }
         console.log(selected);
         //setFramesSeconds(selected);
-        $modalInstance.close(selected);
+        $uibModalInstance.close(selected);
     };
 
     $scope.cancel = function () {
-        $modalInstance.dismiss();
+        $uibModalInstance.dismiss();
     };
 }
