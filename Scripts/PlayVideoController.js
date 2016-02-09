@@ -94,8 +94,9 @@ function PlayVideoController($scope, $window, $stateParams, $http, $q, toaster, 
             // $scope.ExecuteSetDescription();
            $scope.timesToPlay.times = [];
            for (var i = 0 ; i < selected.length; i++) {
-
-               var _time = _convertTimestampToSecs(selected[i].time) - _convertTimestampToSecs(filtered.venues[0].time);
+               
+               //var _time = _convertTimestampToSecs(selected[i].time) - _convertTimestampToSecs(filtered.venues[0].time);
+               var _time = _convertTimestampToSecs(selected[i].time) - _convertTimestampToSecs($scope.informationList[0].Timestamp);
                //console.log("")
                $scope.timesToPlay.times.push(_time);
            }

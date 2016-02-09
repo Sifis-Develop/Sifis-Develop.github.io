@@ -17,6 +17,7 @@ function FilterVenuesService() {
         };
 
         for (var i = 0 ; i < venues.length; i++) {
+
             for (var j = 0 ; j < travelSpots.length; j++) {
 
                 var latDif = venues[i].venue.location.lat - travelSpots[j].Latitude;
@@ -31,6 +32,16 @@ function FilterVenuesService() {
                             filtered.spots.push(travelSpots[j]);
 
                         filtered.combination.push({ venue: venues[i], spotIndex: filtered.spots.indexOf(travelSpots[j]), include: false });
+                    }
+                }
+                else if (travelSpots[j].Tagged == true && i == 0) {
+
+                    var _venue = { venue: { name: 'Tagged Location' } };
+                    var venueToAdd = { 'venue': _venue, 'time': travelSpots[j].Timestamp, include: false, spotIndex: filtered.spots.indexOf(travelSpots[j]), tagged: travelSpots[j].Tagged };
+                    if (filtered.venues.indexOf(venueToAdd) == -1) {
+
+                        filtered.venues.push(venueToAdd);
+                        filtered.combination.push({ venue: _venue, spotIndex: filtered.spots.indexOf(travelSpots[j]), include: false });
                     }
                 }
             }
