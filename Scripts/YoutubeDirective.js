@@ -60,8 +60,8 @@
 
                     if (scope.times[scope.timesCounter] != null) {
 
-                        var start = scope.times[scope.timesCounter] - (4* scope.frameDuration);
-                        var end = scope.times[scope.timesCounter] - scope.frameDuration;
+                        var start = scope.times[scope.timesCounter] - (2* scope.frameDuration);
+                        var end = scope.times[scope.timesCounter] + (2* scope.frameDuration);
                         if (start < 0) {
                             start = 0;
                             end = scope.frameDuration * 2;
