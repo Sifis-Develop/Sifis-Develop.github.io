@@ -1,6 +1,6 @@
 ﻿<div class="row">
     <div class="col-xs-6">
-        <youtube width="640" height="390" videoid="{{videoId}}" times="timesToPlay.times"></youtube>
+        <youtube style="position: absolute;left: 100px;" width="640" height="390" videoid="{{videoId}}" times="timesToPlay.times"></youtube>
     </div>
     <div class="col-xs-6">
         <!--<h1>Information List</h1>
@@ -20,8 +20,29 @@
                 </tr>
             </tbody>
         </table>-->
-        <button class="btn btn-danger" ng-click="getFoursquareInfo()">Get Foursquare Info</button>
-        <button class="btn btn-info" ng-click="openVenuesList()">Play Specific Frames</button>
-        <button class="btn btn-success" ng-click="showAllVenuesList()">Show All Area Venues</button>
+        <!--<button class="btn btn-danger" ng-click="getFoursquareInfo()">Get Foursquare Info</button>-->
+        <!--<button class="btn btn-info" ng-click="openVenuesList()">Play Specific Frames</button>-->
+        <button class="btn btn-danger" ng-click="playFrames()"><i class="fa fa-youtube-play"></i> Play Selected</button>
+        <button class="btn btn-success" ng-click="showAllVenuesList()">Show All City Venues</button>
+        <br>
+        <table class="table table-striped table-hover ">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Has Tag</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in filtered.venues">
+                    <td><input type="checkbox" ng-model="item.include"></td>
+                    <td>{{item.venue.venue.name}}</td>
+                    <td><span ng-if="item.tagged" class="text-primary">Tagged Important</span></td>
+                    <td>{{item.time}}</td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 </div>

@@ -13,6 +13,8 @@ function PlayVideoController($scope, $window, $stateParams, $http, $q, toaster, 
 
     $scope.informationList = [];
 
+    $scope.filtered = [];
+
     var getInformationList = function () {
 
         var deferred = $q.defer();
@@ -20,14 +22,14 @@ function PlayVideoController($scope, $window, $stateParams, $http, $q, toaster, 
             .success(function (data) {
                 deferred.resolve(data);
                 $scope.informationList = data;
-               
-                var sec = _convertTimestampToSecs($scope.informationList[0].Timestamp);
+                //var sec = _convertTimestampToSecs($scope.informationList[0].Timestamp);
                 console.log($scope.informationList);
-                toaster.pop('success', "Travel data retreived !", "Try again", 15000, 'trustedHtml', 'goToLink');
+                $scope.getFoursquareInfo();
+               // toaster.pop('success', "Travel data retreived !", "Try again", 15000, 'trustedHtml', 'goToLink');
             })
             .error(function (data, status, headers, config) {
                 //console.log(data);
-                toaster.pop('error', "Error getting sub service list", "Try again", 15000, 'trustedHtml', 'goToLink');
+                toaster.pop('error', "Error getting travel data", "", 15000, 'trustedHtml', 'goToLink');
             });
         return deferred.promise;
         
@@ -45,11 +47,14 @@ function PlayVideoController($scope, $window, $stateParams, $http, $q, toaster, 
         //console.log($scope.informationList[0]);
         $http.get('https://api.foursquare.com/v2/venues/explore?client_id=B5W3RUPH5P25MREFM0E0AJA0SZADFNMDBK510A2GDM1WANC5&client_secret=ZE00YZW3CVWYLSJLJCGRELNEBT4V30FSHTTUKUYDKGEBPTU5&ll=' + $scope.informationList[0].Latitude + ',' + $scope.informationList[0].Longitude + '&section=sights&v=20151222')//35.340915,25.142496
             .success(function (data) {
+
                 deferred.resolve(data);
 
                 $scope.pointsOfInterest = data.response.groups[0].items;
-                toaster.pop('success', "Foursquare points of interest received !", "Try again", 15000, 'trustedHtml', 'goToLink');
-                $scope.showAllVenuesList();
+
+                $scope.filtered = FilterVenuesService.FilterVenues($scope.pointsOfInterest, $scope.informationList);
+                toaster.pop('success', "Travel data retreived !", "", 15000, 'trustedHtml', 'goToLink');
+                //$scope.showAllVenuesList();
             })
             .error(function (data, status, headers, config) {
                 //console.log(data);
@@ -74,7 +79,7 @@ function PlayVideoController($scope, $window, $stateParams, $http, $q, toaster, 
 
     $scope.openVenuesList = function () {
 
-        var filtered = FilterVenuesService.FilterVenues($scope.pointsOfInterest, $scope.informationList);
+        $scope.filtered = FilterVenuesService.FilterVenues($scope.pointsOfInterest, $scope.informationList);
 
         //$scope.timesToPlay = "No";
         var modalInstance = $uibModal.open({
@@ -83,7 +88,7 @@ function PlayVideoController($scope, $window, $stateParams, $http, $q, toaster, 
             size: 'lg',
             resolve: {
                 items: function () {
-                    return filtered;
+                    return $scope.filtered;
                 }
             }
         });
@@ -125,6 +130,23 @@ function PlayVideoController($scope, $window, $stateParams, $http, $q, toaster, 
             templateUrl: 'Views/ModalYoutube.html',
             size: 'lg'
         });
+    }
+
+
+    //-------------- On Play Button -------------------------------------
+    $scope.playFrames = function () {
+
+        var selected = [];
+        for (var i = 0 ; i < $scope.filtered.venues.length; i++) {
+            if ($scope.filtered.venues[i].include) 
+                selected.push($scope.filtered.venues[i]);
+        }
+
+        $scope.timesToPlay.times = [];
+        for (var i = 0 ; i < selected.length; i++) {
+            var _time = _convertTimestampToSecs(selected[i].time) - _convertTimestampToSecs($scope.informationList[0].Timestamp);
+            $scope.timesToPlay.times.push(_time);
+        }
     }
 }
 
