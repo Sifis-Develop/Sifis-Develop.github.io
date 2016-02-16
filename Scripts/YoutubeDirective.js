@@ -51,7 +51,7 @@
                 var done = false;
                 function onPlayerStateChange(event) {
                     if (event.data == YT.PlayerState.PLAYING && !done) {
-                        setTimeout(stopVideo, scope.frameDuration * 2 * 1200);
+                        setTimeout(stopVideo, scope.frameDuration * 3 * 1200);
                         //done = true;
                     }
                 }
