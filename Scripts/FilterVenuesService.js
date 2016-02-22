@@ -4,7 +4,7 @@
 function FilterVenuesService() {
 
     var FilterVenuesService = {};
-    var distanceFromSpot = 0.0008;
+    var distanceFromSpot = 0.0015;
 
 
     var _filterVenues = function (venues, travelSpots) {
