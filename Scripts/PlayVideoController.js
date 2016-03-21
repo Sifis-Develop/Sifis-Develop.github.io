@@ -132,7 +132,6 @@ function PlayVideoController($scope, $window, $stateParams, $http, $q, toaster, 
         });
     }
 
-
     //-------------- On Play Button -------------------------------------
     $scope.playFrames = function () {
 
@@ -147,6 +146,13 @@ function PlayVideoController($scope, $window, $stateParams, $http, $q, toaster, 
             var _time = _convertTimestampToSecs(selected[i].time) - _convertTimestampToSecs($scope.informationList[0].Timestamp);
             $scope.timesToPlay.times.push(_time);
         }
+    }
+
+    $scope.playOneFrame = function (frame) {
+
+        $scope.timesToPlay.times = [];
+        var _time = _convertTimestampToSecs(frame.time) - _convertTimestampToSecs($scope.informationList[0].Timestamp);
+        $scope.timesToPlay.times.push(_time);
     }
 }
 

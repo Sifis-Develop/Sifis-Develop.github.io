@@ -38,7 +38,10 @@
             <tbody>
                 <tr ng-repeat="item in filtered.venues">
                     <td><input type="checkbox" ng-model="item.include"></td>
-                    <td>{{item.venue.venue.name}}</td>
+                    <td>
+                        {{item.venue.venue.name}}
+                        <span class="btn btn-danger btn-sm" ng-click="playOneFrame(item)">play</span>
+                    </td>
                     <td><span ng-if="item.tagged" class="text-primary">Tagged Important</span></td>
                     <td>{{item.time}}</td>
                 </tr>
