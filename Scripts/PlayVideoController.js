@@ -37,7 +37,7 @@ function PlayVideoController($scope, $window, $stateParams, $http, $q, toaster, 
     getInformationList();
 
     $scope.getFoursquareInfo = function () {
-
+        
         var deferred = $q.defer();
         //console.log($scope.model.selectedTravel);
         //if ($scope.model.selectedTravel == "") {
@@ -45,12 +45,28 @@ function PlayVideoController($scope, $window, $stateParams, $http, $q, toaster, 
         //    return;
         //}
         //console.log($scope.informationList[0]);
-        $http.get('https://api.foursquare.com/v2/venues/explore?client_id=B5W3RUPH5P25MREFM0E0AJA0SZADFNMDBK510A2GDM1WANC5&client_secret=ZE00YZW3CVWYLSJLJCGRELNEBT4V30FSHTTUKUYDKGEBPTU5&ll=' + $scope.informationList[0].Latitude + ',' + $scope.informationList[0].Longitude + '&section=sights&v=20151222')//35.340915,25.142496
+        $http.get('https://api.foursquare.com/v2/venues/explore?client_id=B5W3RUPH5P25MREFM0E0AJA0SZADFNMDBK510A2GDM1WANC5&client_secret=ZE00YZW3CVWYLSJLJCGRELNEBT4V30FSHTTUKUYDKGEBPTU5&ll=' + $scope.informationList[0].Latitude + ',' + $scope.informationList[0].Longitude + '&section=outdoors&limit=50&v=20151222')//35.340915,25.142496
             .success(function (data) {
 
+                console.log(data);
                 deferred.resolve(data);
 
                 $scope.pointsOfInterest = data.response.groups[0].items;
+                var keepOnlySights = [];
+                var test = {};
+
+                $scope.pointsOfInterest.forEach(function (pointsOfInterest) {
+                    //console.log(pointsOfInterest);
+                    test[pointsOfInterest.venue.categories[0].shortName] = 'true';
+                    if( pointsOfInterest.venue.categories[0].shortName == 'Historic Site' ||
+                        pointsOfInterest.venue.categories[0].shortName == 'History Museum' ||
+                        pointsOfInterest.venue.categories[0].shortName == 'Plaza' || 
+                        pointsOfInterest.venue.categories[0].shortName == 'Park')
+                        keepOnlySights.push(pointsOfInterest)
+                });
+
+                $scope.pointsOfInterest = keepOnlySights;
+                console.log(test);
 
                 $scope.filtered = FilterVenuesService.FilterVenues($scope.pointsOfInterest, $scope.informationList);
                 toaster.pop('success', "Travel data retreived !", "", 15000, 'trustedHtml', 'goToLink');
